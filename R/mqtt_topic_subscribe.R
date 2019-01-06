@@ -18,6 +18,8 @@
 #' @param timeout non negative integer, specifies a timeout in seconds how long to process incoming MQTT messages.
 #'                Defaults to 0, means no timeout.
 #'
+#' @param qos integer : 0 or 1 or 2, quality of service level to use for the subscription. Defaults to 0.
+#'
 #' @param verbose logical (not NA), print received messages verbosely. With this argument, messages will be printed as
 #'                "topic payload". When this argument is not given, the messages are printed as "payload". Default
 #'                is FALSE.
@@ -64,9 +66,9 @@
 
 
 
-mqtt_topic_subscribe = function( topic, intern = F, host = 'localhost', port = NULL, num.messages = 0, timeout = 0, verbose = F,
+mqtt_topic_subscribe = function( topic, intern = F, host = 'localhost', port = NULL, num.messages = 0, timeout = 0, qos = 0,
 
-                                 append.eol = T, enable.debugging = F, clientid = NULL, keepalive = 60 ){
+                                 verbose = F, append.eol = T, enable.debugging = F, clientid = NULL, keepalive = 60 ){
 
   #..... Arguments check ......
 
@@ -81,6 +83,8 @@ mqtt_topic_subscribe = function( topic, intern = F, host = 'localhost', port = N
   if( round( num.messages ) != num.messages || num.messages < 0 ){ stop( 'num.messages must be non negative integer.' ) }
 
   if( round( timeout ) != timeout || timeout < 0 ){ stop( 'timeout must be non negative integer.' ) }
+
+  if( round( qos ) != qos || !( qos %in% c( 0, 1, 2 ) ) ){ stop( 'qos must be an integer among 0, 1 or 2.' ) }
 
   if( is.na( verbose ) || !is.logical( verbose ) ){ stop( 'verbose must be logical (not NA).' ) }
 
@@ -106,6 +110,8 @@ mqtt_topic_subscribe = function( topic, intern = F, host = 'localhost', port = N
   if( enable.debugging ){ mqtt_sub_base = paste0( mqtt_sub_base, ' -d ' ) }    #...... enabling debug messages
 
   if( !is.null( clientid ) ){ mqtt_sub_base = paste0( mqtt_sub_base, ' -i ', clientid ) }    #.... adding clientid
+
+  mqtt_sub_base = paste0( mqtt_sub_base, ' -q ', qos )     #..... adding qos
 
   mqtt_sub_base = paste0( mqtt_sub_base, ' -k ', keepalive )    #..... adding keepalive capability
 
