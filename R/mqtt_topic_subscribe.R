@@ -66,7 +66,7 @@
 
 mqtt_topic_subscribe = function( topic, intern = F, host = 'localhost', port = NULL, num.messages = 0, timeout = 0, verbose = F,
 
-                                 append.eol = T, enable.debugging = F, clientid = , keepalive = 60 ){
+                                 append.eol = T, enable.debugging = F, clientid = NULL, keepalive = 60 ){
 
   #..... Arguments check ......
 
@@ -86,6 +86,8 @@ mqtt_topic_subscribe = function( topic, intern = F, host = 'localhost', port = N
 
   if( is.na( append.eol ) || !is.logical( append.eol ) ){ stop( 'append.eol must be logical (not NA).' ) }
 
+  if( !is.null( clientid ) && !is.character( clientid ) ){ stop( 'clientid must be character string.' ) }
+
   if( round( keepalive ) != keepalive || keepalive <= 0 ){ stop( 'keepalive must be positive integer.' ) }
 
 
@@ -102,6 +104,8 @@ mqtt_topic_subscribe = function( topic, intern = F, host = 'localhost', port = N
   if( !append.eol ){ mqtt_sub_base = paste0( mqtt_sub_base, ' -N ' ) }    #...... disabling appending end of line character
 
   if( enable.debugging ){ mqtt_sub_base = paste0( mqtt_sub_base, ' -d ' ) }    #...... enabling debug messages
+
+  if( !is.null( clientid ) ){ mqtt_sub_base = paste0( mqtt_sub_base, ' -i ', clientid ) }    #.... adding clientid
 
   mqtt_sub_base = paste0( mqtt_sub_base, ' -k ', keepalive )    #..... adding keepalive capability
 
