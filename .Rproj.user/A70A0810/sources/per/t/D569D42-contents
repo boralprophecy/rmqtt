@@ -1,0 +1,28 @@
+#' Returns last value of a dataframe
+#'
+#' The function \code{last_na} returns the last value and deals with NA if no one is finite
+#'
+#' @param xd xts dataframe column
+#' @param na.rm boolean, DEFAULT TRUE, returns NA values if all are NA
+#'
+#' @details
+#'
+#'#' @return Returns last values of x
+#'
+#' @export
+#'
+#' @examples
+#' require(xts)
+#'
+#'
+
+
+last_na <- function(xd, na.rm=TRUE) {
+    if (na.rm) {
+      mask <- is.finite(xd)
+      if (any(mask)) return(xts::last(xd[mask, ])) else return(NA)
+      }
+    else {
+       return(xts::last(xd))
+      }
+  }

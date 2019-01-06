@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1546769793356.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "904846799",
+    "id" : "B717E758",
+    "lastKnownWriteTime" : 1546770464,
+    "last_content_update" : 1546770464575,
+    "path" : "D:/innovation/rmqtt/R/mqtt_topic_subscribe.R",
+    "project_path" : "R/mqtt_topic_subscribe.R",
+    "properties" : {
+        "cursorPosition" : "4,9",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

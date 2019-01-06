@@ -1,0 +1,6 @@
+#' Subscribes to mqtt topics
+#'
+#' The function \code{mqtt_topic_subscribe} subscribes to mqtt topics
+#'
+#' @param
+

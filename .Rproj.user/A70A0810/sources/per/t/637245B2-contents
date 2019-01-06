@@ -1,0 +1,25 @@
+library( RJSONIO )
+
+system_os = tolower( Sys.info()["sysname"] )
+
+if( system_os == 'windows' ){
+
+setwd( 'D:/prophecy/rpi code combined/10 mins/home/pi/r_process/gauge_code' )
+
+json0 = suppressWarnings( lapply( readLines( "D:\\prophecy\\rpi code combined\\10 mins\\home\\pi\\r_process\\gauge_code\\invalid_json.json", n = 1L ), fromJSON ) )
+
+} else{
+  
+  json0 = suppressWarnings( lapply( readLines( "/home/centos/invalid_json.json", n = 1L ), fromJSON ) )
+  
+}
+
+input_json = json0[[1]]
+
+#system( 'mosquitto_pub -h mqtt-data.machinesense.com -p 8883 -t "edge/output@@test2.json" -m \'test\' -i neo -q 1' )
+
+paste0( "mosquitto_pub -h mqtt-data.machinesense.com -p 8883 -t \"edge/output@@", "test6.output.json\" -m '", toJSON( input_json ), "' -i neo -q 1" )
+
+system( paste0( "mosquitto_pub -h mqtt-data.machinesense.com -p 8883 -t \"edge/output@@", "test6.output.json\" -m '", toJSON( input_json ), "' -i neo -q 1" ) )
+
+system( paste0( "mosquitto_sub -h test.mosquitto.org -t \"magicblock/demo_user/temperature2\" -v" ) )
