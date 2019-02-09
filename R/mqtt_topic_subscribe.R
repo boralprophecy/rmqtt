@@ -30,14 +30,14 @@
 #' @param enable.debugging logical (not NA), whether debug messages should be enabled. Default is FALSE.
 #'
 #' @param clientid character string, id to use for this client. Defaults to NULL, means mosquitto_sub_ appended with
-#'                 the process id of the client. Cannot be used at the same time as the clientid.prefix argument.
+#'                 the process id of the client.
 #'
 #' @param keepalive positive integer, umber of seconds between sending PING commands to the broker for the purposes of
 #'                  informing it we are still connected and functioning. Defaults to 60 seconds.
 #'
 #' @details If both num.messages and timeout is supplied, disconnection happens whichever condition is fulfilled first.
 #' append.eol allows streaming of payload data from multiple messages directly to another application unmodified.
-#' Only really makes sense when not using -v.
+#' Only really makes sense when not using verbose.
 #'
 #' @examples
 #'
@@ -90,6 +90,8 @@ mqtt_topic_subscribe = function( topic, intern = F, host = 'localhost', port = N
 
   if( is.na( append.eol ) || !is.logical( append.eol ) ){ stop( 'append.eol must be logical (not NA).' ) }
 
+  if( is.na( enable.debugging ) || !is.logical( enable.debugging ) ){ stop( 'enable.debugging must be logical (not NA).' ) }
+
   if( !is.null( clientid ) && !is.character( clientid ) ){ stop( 'clientid must be character string.' ) }
 
   if( round( keepalive ) != keepalive || keepalive <= 0 ){ stop( 'keepalive must be positive integer.' ) }
@@ -109,14 +111,16 @@ mqtt_topic_subscribe = function( topic, intern = F, host = 'localhost', port = N
 
   if( enable.debugging ){ mqtt_sub_base = paste0( mqtt_sub_base, ' -d ' ) }    #...... enabling debug messages
 
-  if( !is.null( clientid ) ){ mqtt_sub_base = paste0( mqtt_sub_base, ' -i ', clientid ) }    #.... adding clientid
+  if( !is.null( clientid ) ){ mqtt_sub_base = paste0( mqtt_sub_base, ' -i "', clientid, '"' ) }    #.... adding clientid
 
   mqtt_sub_base = paste0( mqtt_sub_base, ' -q ', qos )     #..... adding qos
 
   mqtt_sub_base = paste0( mqtt_sub_base, ' -k ', keepalive )    #..... adding keepalive capability
 
-  mqtt_sub_command = paste0( mqtt_sub_base, ' -t "', topic, '"' )     #..... adding topic
+  mqtt_sub_command = paste0( mqtt_sub_base, ' -t "', topic, '"' )     #..... adding topic .... quotes are necessary in case topic contains space
 
   system( mqtt_sub_command, intern = intern )
 
 }
+
+
