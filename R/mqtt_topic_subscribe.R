@@ -1,6 +1,6 @@
-#' Subscribes to mqtt topics
+#' @title Subscribes to mqtt topics
 #'
-#' The function \code{mqtt_topic_subscribe} subscribes to mqtt topics
+#' @description The function \code{mqtt_topic_subscribe} subscribes to mqtt topics
 #'
 #' @param topic character string, mqtt topic to subscribe to.
 #'
@@ -41,27 +41,45 @@
 #'
 #' @examples
 #'
+#'\donttest{
 #' mqtt_topic_subscribe( topic = 'magicblock/demo_user/temperature2', host = 'test.mosquitto.org' )
+#' }
 #'
 #' #.... Stores output as R character vector. Turning it off, just prints the output to console ....
 #'
-#' mqtt_topic_subscribe( topic = 'magicblock/demo_user/temperature2', intern = T, host = 'test.mosquitto.org' )
+#'\donttest{
+#' mqtt_topic_subscribe( topic = 'magicblock/demo_user/temperature2', intern = T,
+#' host = 'test.mosquitto.org' )
+#'}
 #'
 #' #.... Disconnects after receiving 5 messages ....
 #'
-#' mqtt_topic_subscribe( topic = 'magicblock/demo_user/temperature2', host = 'test.mosquitto.org', num.messages = 5 )
+#'\donttest{
+#' mqtt_topic_subscribe( topic = 'magicblock/demo_user/temperature2', host = 'test.mosquitto.org',
+#'  num.messages = 5 )
+#'}
 #'
 #' #.... Disconnects after 6 seconds of starting connection with broker, also showing verbose ....
 #'
-#' mqtt_topic_subscribe( topic = 'magicblock/demo_user/temperature2', host = 'test.mosquitto.org', timeout = 6, verbose = T )
+#'\donttest{
+#' mqtt_topic_subscribe( topic = 'magicblock/demo_user/temperature2', host = 'test.mosquitto.org',
+#'  timeout = 6, verbose = T )
+#'}
 #'
 #' #.... End of line character is not added after messages are received ....
 #'
-#' mqtt_topic_subscribe( topic = 'magicblock/demo_user/temperature2', host = 'test.mosquitto.org', num.messages = 5, append.eol = F )
+#'\donttest{
+#' mqtt_topic_subscribe( topic = 'magicblock/demo_user/temperature2', host = 'test.mosquitto.org',
+#'  num.messages = 5, append.eol = F )
+#'}
 #'
 #' #.... Enabling debug messages .....
+#'\donttest{
+#' mqtt_topic_subscribe( topic = 'magicblock/demo_user/temperature2', host = 'test.mosquitto.org',
+#'  num.messages = 5, enable.debugging = T )
+#' }
 #'
-#' mqtt_topic_subscribe( topic = 'magicblock/demo_user/temperature2', host = 'test.mosquitto.org', num.messages = 5, enable.debugging = T )
+#' @export
 
 
 
