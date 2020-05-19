@@ -4,7 +4,7 @@ Enable applications to connect to an MQTT broker to publish messages, and to sub
 
 ## Quick Start
 
-Follow these steps to start using :
+Follow these steps to start using mqtt using R :
 
 1) Download and install mosquitto for your OS ( https://mosquitto.org/download/ )
 
