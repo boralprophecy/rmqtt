@@ -6,7 +6,7 @@ Enable applications to connect to an MQTT broker to publish messages, and to sub
 
 Follow this steps to start using :
 
-1) Download and install mosquitto for your OS
+1) Download and install mosquitto for your OS ( https://mosquitto.org/download/ )
 
 2) Open console and change to mosquitto installation directory
 
