@@ -3,8 +3,8 @@ Type: Package
 Title: MQTT Client for R
 Version: 0.1.0
 Author: Soumya Boral
-Maintainer: The package maintainer <boralsoumya@yahoo.com>
-Description: Enable applications to connect to an MQTT broker to publish messages, and to subscribe to topics and receive published messages. It also provides some helper functions to make publishing one off messages to an MQTT server very straightforward. Tools are provided to interoperate with ‘MQTT’ message brokers in R.
+Maintainer: Soumya Boral <boralsoumya@yahoo.com>
+Description: Enable applications to connect to an 'MQTT' <http://mqtt.org/> broker to publish messages, and to subscribe to topics and receive published messages. It also provides some helper functions to make publishing one off messages to an 'MQTT' server very straightforward. Tools are provided to interoperate with 'MQTT' message brokers in R.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
