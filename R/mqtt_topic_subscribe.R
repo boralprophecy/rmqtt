@@ -8,6 +8,10 @@
 #'
 #' @param host  character string,  mqtt host to connect to. Defaults to localhost.
 #'
+#' @param password  character string,  password. Defaults to no password
+#'
+#' @param username  character string,  username. Defaults to no username
+#'
 #' @param port  integer, connect to the specified port. Default NULL denotes 1883 for plain MQTT or 8883 for MQTT
 #'              over TLS.
 #'
@@ -86,7 +90,7 @@
 
 mqtt_topic_subscribe = function( topic, intern = F, host = 'localhost', port = NULL, num.messages = 0, timeout = 0, qos = 0,
 
-                                 verbose = F, append.eol = T, enable.debugging = F, clientid = NULL, keepalive = 60 ){
+                                 verbose = F, append.eol = T, enable.debugging = F, clientid = NULL, keepalive = 60, username = NULL, password = NULL ){
 
   #..... Arguments check ......
 
@@ -130,6 +134,8 @@ mqtt_topic_subscribe = function( topic, intern = F, host = 'localhost', port = N
   if( enable.debugging ){ mqtt_sub_base = paste0( mqtt_sub_base, ' -d ' ) }    #...... enabling debug messages
 
   if( !is.null( clientid ) ){ mqtt_sub_base = paste0( mqtt_sub_base, ' -i "', clientid, '"' ) }    #.... adding clientid
+
+  if( !is.null(password) & !is.null(username) ){ mqtt_sub_base = paste0( mqtt_sub_base, ' -u ', username, ' -P ', password ) }    #.... adding username and password
 
   mqtt_sub_base = paste0( mqtt_sub_base, ' -q ', qos )     #..... adding qos
 
